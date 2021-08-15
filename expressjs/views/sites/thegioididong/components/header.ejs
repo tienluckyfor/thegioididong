@@ -1,0 +1,787 @@
+<% const {con}=app.locals %>
+
+    <html lang="vi-VN">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <title>
+            <%-con.title-%>
+        </title>
+        <meta name="keywords"
+            content="Thế giới di động, Thegioididong, điện thoại di động, dtdd, smartphone, tablet, máy tính bảng, laptop, máy tính xách tay, phụ kiện, smartwatch, đồng hồ, tin công nghệ">
+        <meta name="description" content="<%-con.description-%>">
+        <meta property="og:title" content="<%-con.title-%>">
+        <meta property="og:description" content="<%-con.description-%>">
+
+
+        <meta content="INDEX,FOLLOW" name="robots">
+        <meta name="viewport" content="width=device-width">
+        <meta name="copyright" content="Công ty Cổ phần Thế Giới Di Động">
+        <meta name="author" content="Công ty Cổ phần Thế Giới Di Động">
+        <meta http-equiv="audience" content="General">
+        <meta name="resource-type" content="Document">
+        <meta name="distribution" content="Global">
+        <meta name="revisit-after" content="1 days">
+        <meta name="GENERATOR" content="Công ty Cổ phần Thế Giới Di Động">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link href="/favicon_TGDD.ico" rel="shortcut icon" type="image/x-icon">
+        <link href="/favicon_TGDD.ico" rel="apple-touch-icon">
+        <link href="/favicon_TGDD.ico" rel="apple-touch-icon-precomposed">
+        <meta property="og:site_name" content="Thegioididong.com">
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="vi_VN">
+        <meta property="fb:pages" content="214993791879039">
+        <meta http-equiv="x-dns-prefetch-control" content="on">
+        <link rel="stylesheet" href="./assets/css/styles.css">
+    </head>
+
+    <body>
+        <div class="banner-media" style="background-color: rgb(255, 242, 0);">
+            <div class="media-slider" data-size="1">
+                <div class="item visible" data-background-color="#fff200" data-order="1">
+                    <a aria-label="slide" data-cate="0" data-place="1612" href="/flashsale"><img
+                            src="<%-con.header_image.media[0].file-%>" alt="An tâm ở nhà"></a>
+                </div>
+            </div>
+            <style>
+                .banner-media {
+                    background-color: #fff200;
+                }
+            </style>
+
+        </div>
+
+        <header class="header  " data-sub="0">
+            <div class="header__top">
+                <div>
+                    <a href="/" class="header__logo">
+                        <!-- <i class="icon-logo"></i> -->
+                        <img src="<%-con.logo.media[0].file-%>" style="width:141px" />
+                    </a>
+
+
+                    <div class="bordercol"></div>
+                    <a href="javascript:void(0)" class="header__address" onclick="OpenLocation()">
+                        Xem giá, khuyến mãi tại
+                        <span data-province="3" data-district="0" data-ward="0">Hồ Chí Minh</span>
+                    </a>
+
+                    <form action="/tim-kiem" onsubmit="return suggestSearch(event);" class="header__search">
+                        <input id="skw" type="text" class="input-search" onkeyup="suggestSearch(event);"
+                            placeholder="Bạn tìm gì..." name="key" autocomplete="off" maxlength="100">
+                        <button type="submit">
+                            <i class="icon-search"></i>
+                        </button>
+                        <div id="search-result" style="display: none;"></div>
+                    </form>
+                    <a href="/cart" class="header__cart menu-info">
+                        <i class="icon-cart"></i>
+                        <span>Giỏ hàng</span>
+                    </a>
+                    <a href="/lich-su-mua-hang" class="header__history">Lịch sử đơn hàng</a>
+                    <div class="bordercol"></div>
+                    <a style="padding: 0 !important;" href="javascript:void(0)" class="header__hot">
+                    </a>
+                    <div class="header__listtop">
+                        <div class="bordercol"></div>
+                        <div class="divitem">
+                            <a href="/tin-tuc">24h<br>Công nghệ</a>
+                        </div>
+                        <div class="bordercol"></div>
+                        <div class="divitem">
+                            <a href="/hoi-dap">Hỏi Đáp</a>
+                        </div>
+                        <div class="bordercol"></div>
+                        <div class="divitem">
+                            <a href="/game-app">Game App</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header__main">
+                <div>
+                    <% const res=await instance.get('/menu'); const menu=res?.data?.data; %>
+                        <ul class="main-menu">
+
+
+                            <% menu.forEach(function(item){ %>
+                                <% if(item.sub_menu.length==0){%>
+                                    <li>
+                                        <a href="<%-item.link-%>">
+                                            <img style="width:15px;margin-right:4px;"
+                                                src="<%-item.image.media[0].file-%>" />
+                                            <span>
+                                                <%-item.name-%>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <% }else{%>
+                                        <li class="phukien">
+                                            <a href="<%-item.link-%>">
+                                                <img src="<%-item.image.media[0].file-%>" />
+                                                <span>
+                                                    <%-item.name-%>
+                                                </span>
+                                            </a>
+                                            <div class="navmwg accessories">
+                                                <% item.sub_menu.forEach(function(item1){ %>
+                                                    <div class="PKDD">
+                                                        <strong>
+                                                            <%-item1.name-%>
+                                                        </strong>
+                                                        <% item1.list.forEach(function(item2){ %>
+                                                            <a href="<%-item2.link-%>">
+                                                                <h3>
+                                                                    <%-item2.name-%>
+                                                                </h3>
+                                                            </a>
+                                                            <% })%>
+                                                                <br><br>
+                                                    </div>
+                                                    <% })%>
+                                            </div>
+                                        </li>
+                                        <% } %>
+                                            <% }) %>
+
+
+                        </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="locationbox__overlay"></div>
+        <div class="locationbox">
+            <div class="locationbox__item locationbox__item--right">
+                <p>Chọn địa chỉ nhận hàng</p>
+                <a onclick="OpenLocation()" href="javascript:void(0)">Đóng</a>
+            </div>
+            <div class="locationbox__popup" id="lc_pop--choose">
+                <div class="locationbox__popup--cnt locationbox__popup--choose">
+                    <div class="locationbox__popup--chooseDefault">
+                        <span id="locationbox__showfull" class="locationbox__showfull "><b>Chọn đầy đủ địa chỉ nhận
+                                hàng</b>
+                            để biết chính xác thời gian giao</span>
+                        <div class="form-group">
+                            <div class="boxprov">
+                                <div class="boxprov__listTT" id="location_listPro">
+                                    <span onclick="LocaltionShowAll(this)" id="boxprovProvince">Hồ Chí Minh</span>
+
+
+                                    <div id="province-box" class="boxprov__listTT--scroll">
+                                        <div class="stores-box">
+                                            <div class="scroll-box">
+                                                <div class="boxprov__listTT--bordertop"></div>
+                                                <div class="search-container">
+                                                    <input autocomplete="off" type="text"
+                                                        placeholder="Nhập tỉnh, thành để tìm"
+                                                        onkeyup="searchLocation(this)">
+                                                    <button class="btn-search-location">
+                                                        <i class="icon-search"></i>
+                                                    </button>
+                                                </div>
+                                                <ul>
+                                                    <li>
+                                                        <a class="active" data-value="3" href="javascript:void(0)"
+                                                            onclick="changePoupProv(3, this)">
+                                                            Hồ Chí Minh
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="5" href="javascript:void(0)"
+                                                            onclick="changePoupProv(5, this)">
+                                                            Hà Nội
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="9" href="javascript:void(0)"
+                                                            onclick="changePoupProv(9, this)">
+                                                            Đà Nẵng
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="82" href="javascript:void(0)"
+                                                            onclick="changePoupProv(82, this)">
+                                                            An Giang
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="102" href="javascript:void(0)"
+                                                            onclick="changePoupProv(102, this)">
+                                                            Bà Rịa - Vũng Tàu
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="103" href="javascript:void(0)"
+                                                            onclick="changePoupProv(103, this)">
+                                                            Bắc Giang
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="104" href="javascript:void(0)"
+                                                            onclick="changePoupProv(104, this)">
+                                                            Bắc Kạn
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="105" href="javascript:void(0)"
+                                                            onclick="changePoupProv(105, this)">
+                                                            Bạc Liêu
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="106" href="javascript:void(0)"
+                                                            onclick="changePoupProv(106, this)">
+                                                            Bắc Ninh
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="107" href="javascript:void(0)"
+                                                            onclick="changePoupProv(107, this)">
+                                                            Bến Tre
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="108" href="javascript:void(0)"
+                                                            onclick="changePoupProv(108, this)">
+                                                            Bình Định
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="109" href="javascript:void(0)"
+                                                            onclick="changePoupProv(109, this)">
+                                                            Bình Dương
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="110" href="javascript:void(0)"
+                                                            onclick="changePoupProv(110, this)">
+                                                            Bình Phước
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="111" href="javascript:void(0)"
+                                                            onclick="changePoupProv(111, this)">
+                                                            Bình Thuận
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="81" href="javascript:void(0)"
+                                                            onclick="changePoupProv(81, this)">
+                                                            Cà Mau
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="7" href="javascript:void(0)"
+                                                            onclick="changePoupProv(7, this)">
+                                                            Cần Thơ
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="112" href="javascript:void(0)"
+                                                            onclick="changePoupProv(112, this)">
+                                                            Cao Bằng
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="6" href="javascript:void(0)"
+                                                            onclick="changePoupProv(6, this)">
+                                                            Đắk Lắk
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="113" href="javascript:void(0)"
+                                                            onclick="changePoupProv(113, this)">
+                                                            Đắk Nông
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="114" href="javascript:void(0)"
+                                                            onclick="changePoupProv(114, this)">
+                                                            Điện Biên
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="8" href="javascript:void(0)"
+                                                            onclick="changePoupProv(8, this)">
+                                                            Đồng Nai
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="115" href="javascript:void(0)"
+                                                            onclick="changePoupProv(115, this)">
+                                                            Đồng Tháp
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="116" href="javascript:void(0)"
+                                                            onclick="changePoupProv(116, this)">
+                                                            Gia Lai
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="117" href="javascript:void(0)"
+                                                            onclick="changePoupProv(117, this)">
+                                                            Hà Giang
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="118" href="javascript:void(0)"
+                                                            onclick="changePoupProv(118, this)">
+                                                            Hà Nam
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="120" href="javascript:void(0)"
+                                                            onclick="changePoupProv(120, this)">
+                                                            Hà Tĩnh
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="121" href="javascript:void(0)"
+                                                            onclick="changePoupProv(121, this)">
+                                                            Hải Dương
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="101" href="javascript:void(0)"
+                                                            onclick="changePoupProv(101, this)">
+                                                            Hải Phòng
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="122" href="javascript:void(0)"
+                                                            onclick="changePoupProv(122, this)">
+                                                            Hậu Giang
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="123" href="javascript:void(0)"
+                                                            onclick="changePoupProv(123, this)">
+                                                            Hòa Bình
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="124" href="javascript:void(0)"
+                                                            onclick="changePoupProv(124, this)">
+                                                            Hưng Yên
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="125" href="javascript:void(0)"
+                                                            onclick="changePoupProv(125, this)">
+                                                            Khánh Hòa
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="126" href="javascript:void(0)"
+                                                            onclick="changePoupProv(126, this)">
+                                                            Kiên Giang
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="127" href="javascript:void(0)"
+                                                            onclick="changePoupProv(127, this)">
+                                                            Kon Tum
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="128" href="javascript:void(0)"
+                                                            onclick="changePoupProv(128, this)">
+                                                            Lai Châu
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="129" href="javascript:void(0)"
+                                                            onclick="changePoupProv(129, this)">
+                                                            Lâm Đồng
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="130" href="javascript:void(0)"
+                                                            onclick="changePoupProv(130, this)">
+                                                            Lạng Sơn
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="131" href="javascript:void(0)"
+                                                            onclick="changePoupProv(131, this)">
+                                                            Lào Cai
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="132" href="javascript:void(0)"
+                                                            onclick="changePoupProv(132, this)">
+                                                            Long An
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="133" href="javascript:void(0)"
+                                                            onclick="changePoupProv(133, this)">
+                                                            Nam Định
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="134" href="javascript:void(0)"
+                                                            onclick="changePoupProv(134, this)">
+                                                            Nghệ An
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="135" href="javascript:void(0)"
+                                                            onclick="changePoupProv(135, this)">
+                                                            Ninh Bình
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="136" href="javascript:void(0)"
+                                                            onclick="changePoupProv(136, this)">
+                                                            Ninh Thuận
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="137" href="javascript:void(0)"
+                                                            onclick="changePoupProv(137, this)">
+                                                            Phú Thọ
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="138" href="javascript:void(0)"
+                                                            onclick="changePoupProv(138, this)">
+                                                            Phú Yên
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="139" href="javascript:void(0)"
+                                                            onclick="changePoupProv(139, this)">
+                                                            Quảng Bình
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="140" href="javascript:void(0)"
+                                                            onclick="changePoupProv(140, this)">
+                                                            Quảng Nam
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="141" href="javascript:void(0)"
+                                                            onclick="changePoupProv(141, this)">
+                                                            Quảng Ngãi
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="142" href="javascript:void(0)"
+                                                            onclick="changePoupProv(142, this)">
+                                                            Quảng Ninh
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="143" href="javascript:void(0)"
+                                                            onclick="changePoupProv(143, this)">
+                                                            Quảng Trị
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="144" href="javascript:void(0)"
+                                                            onclick="changePoupProv(144, this)">
+                                                            Sóc Trăng
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="145" href="javascript:void(0)"
+                                                            onclick="changePoupProv(145, this)">
+                                                            Sơn La
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="146" href="javascript:void(0)"
+                                                            onclick="changePoupProv(146, this)">
+                                                            Tây Ninh
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="147" href="javascript:void(0)"
+                                                            onclick="changePoupProv(147, this)">
+                                                            Thái Bình
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="148" href="javascript:void(0)"
+                                                            onclick="changePoupProv(148, this)">
+                                                            Thái Nguyên
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="149" href="javascript:void(0)"
+                                                            onclick="changePoupProv(149, this)">
+                                                            Thanh Hóa
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="150" href="javascript:void(0)"
+                                                            onclick="changePoupProv(150, this)">
+                                                            Thừa Thiên Huế
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="151" href="javascript:void(0)"
+                                                            onclick="changePoupProv(151, this)">
+                                                            Tiền Giang
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="152" href="javascript:void(0)"
+                                                            onclick="changePoupProv(152, this)">
+                                                            Trà Vinh
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="153" href="javascript:void(0)"
+                                                            onclick="changePoupProv(153, this)">
+                                                            Tuyên Quang
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="154" href="javascript:void(0)"
+                                                            onclick="changePoupProv(154, this)">
+                                                            Vĩnh Long
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="155" href="javascript:void(0)"
+                                                            onclick="changePoupProv(155, this)">
+                                                            Vĩnh Phúc
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="" data-value="156" href="javascript:void(0)"
+                                                            onclick="changePoupProv(156, this)">
+                                                            Yên Bái
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="locationbox__detail hide" id="lc_detail">
+                            <p id="lc_detail-dis"><span>: </span><strong></strong></p>
+                            <p id="lc_detail-ward"><span>: </span><strong></strong></p>
+                            <a id="lc_btn-changeLc" class="locationbox__btnchangeLC" href="javascript:void(0)"
+                                onclick="locationChangeLocation();">Chọn địa chỉ khác</a>
+                        </div>
+                        <div class="locationbox__area ">
+                            <div class="form-group">
+                                <div class="boxprov">
+                                    <div class="boxprov__listTT" id="location_listDistrict">
+                                        <span id="boxprovDistrict" onclick="LocaltionShowAll(this)" data-crrdis="0">Vui
+                                            lòng
+                                            chọn Quận/Huyện</span>
+
+                                        <div id="district-box-poup" class="boxprov__listTT--scroll">
+                                            <div class="stores-box">
+                                                <div class="scroll-box">
+                                                    <div class="boxprov__listTT--bordertop"></div>
+                                                    <div class="warning-text">
+                                                        Quận 2, quận 9, quận Thủ Đức đã được thay đổi và gộp lại thành
+                                                        TP.
+                                                        Thủ Đức
+                                                    </div>
+                                                    <div class="search-container">
+                                                        <input autocomplete="off" type="text"
+                                                            placeholder="Nhập quận, huyện để tìm"
+                                                            onkeyup="searchLocation(this)">
+                                                        <button class="btn-search-location">
+                                                            <i class="icon-search"></i>
+                                                        </button>
+                                                    </div>
+                                                    <ul>
+                                                        <li>
+                                                            <a class="" data-dis="2087" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,2087, this)">
+                                                                TP. Thủ Đức (Gồm Q2, Q9, Q.TĐ)
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="16" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,16, this)">
+                                                                Quận 1
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="18" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,18, this)">
+                                                                Quận 3
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="19" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,19, this)">
+                                                                Quận 4
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="20" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,20, this)">
+                                                                Quận 5
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="21" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,21, this)">
+                                                                Quận 6
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="22" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,22, this)">
+                                                                Quận 7
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="23" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,23, this)">
+                                                                Quận 8
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="25" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,25, this)">
+                                                                Quận 10
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="26" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,26, this)">
+                                                                Quận 11
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="27" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,27, this)">
+                                                                Quận 12
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="31" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,31, this)">
+                                                                Quận Bình Tân
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="51" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,51, this)">
+                                                                Quận Bình Thạnh
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="29" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,29, this)">
+                                                                Quận Gò Vấp
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="52" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,52, this)">
+                                                                Quận Phú Nhuận
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="30" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,30, this)">
+                                                                Quận Tân Bình
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="33" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,33, this)">
+                                                                Quận Tân Phú
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="36" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,36, this)">
+                                                                Huyện Bình Chánh
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="61" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,61, this)">
+                                                                Huyện Cần Giờ
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="34" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,34, this)">
+                                                                Huyện Củ Chi
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="32" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,32, this)">
+                                                                Huyện Hóc Môn
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="" data-dis="35" href="javascript:void(0)"
+                                                                onclick="changePoupDistrict(3,35, this)">
+                                                                Huyện Nhà Bè
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="boxprov">
+                                    <div class="boxprov__listTT" id="location_listWard">
+                                        <span class="disabled" id="boxprovWard" onclick="LocaltionShowAll(this)"
+                                            data-ward="0">Vui lòng chọn Phường/Xã</span>
+                                        <div id="ward-box" class="boxprov__listTT--scroll" style="display: none;">
+                                            <div class="boxprov__listTT--scrollcnt">
+                                                <input autocomplete="off" type="text"
+                                                    placeholder="Nhập phường, xã để tìm" onkeyup="searchLocation(this)">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="boxprov">
+                                    <input type="text" placeholder="Số nhà, tên đường (không bắt buộc)"
+                                        id="locationAddress">
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="hdLocationProvinceId" value="3">
+                        <input type="hidden" id="hdLocationDisId" value="0">
+                        <input type="hidden" id="hdLocationWardId" value="0">
+                        <input type="hidden" id="hdLocationAddress">
+                        <b id="h-provincename" style="display:none!important" data-provinceid="3">Hồ Chí Minh</b>
+
+                    </div>
+                    <div class="accept">
+                        <a href="javascript:void(0)" onclick="locationConfirm()" class="btnConfirm"
+                            id="lc_btn-Confirm">Xác
+                            nhận</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
